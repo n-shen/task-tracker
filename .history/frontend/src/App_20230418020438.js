@@ -1,11 +1,11 @@
 import React from "react";
-import TaskTracker from "./components/task";
+import Task from "./components/task";
 
 
 function App() {
   return (
     <div className="App">
-      <TaskTracker />
+      <Task />
     </div>
   );
 }
