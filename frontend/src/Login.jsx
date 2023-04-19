@@ -1,12 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import {} from 'react-bootstrap'
 import {MDBContainer, MDBCol, MDBRow, MDBBtn, MDBIcon, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
 import './Login.css';
+import { Grid } from '@mui/material';
 
 
 function Login() {
 
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+    }
+
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    }
+
+    const onSubmit = () => {
+        console.log("Login successful for: " + username);
+    }
+
   return (
+    <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        style={{ minHeight: '100vh' }}
+        >
+        <Grid item xs={6}>
+               
     <MDBContainer fluid className="p-3 my-5 h-custom">
 
       <MDBRow>
@@ -17,7 +45,7 @@ function Login() {
 
         <MDBCol col='4' md='6'>
 
-          <div className="d-flex flex-row align-items-center justify-content-center">
+          {/* <div className="d-flex flex-row align-items-center justify-content-center">
 
             <p className="lead fw-normal mb-0 me-3">Sign in with</p>
 
@@ -33,14 +61,14 @@ function Login() {
               <MDBIcon fab icon='linkedin-in' />
             </MDBBtn>
 
-          </div>
+          </div> */}
 
           <div className="divider d-flex align-items-center my-4">
-            <p className="text-center fw-bold mx-3 mb-0">Or</p>
+            <p className="text-center fw-bold mx-3 mb-0">Sign In</p>
           </div>
 
-          <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg"/>
-          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg"/>
+          <MDBInput wrapperClass='mb-4' label='Email address' id='formControlLg' type='email' size="lg" onChange={onChangeUsername}/>
+          <MDBInput wrapperClass='mb-4' label='Password' id='formControlLg' type='password' size="lg" onChange={onChangePassword} />
 
           <div className="d-flex justify-content-between mb-4">
             <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Remember me' />
@@ -48,7 +76,7 @@ function Login() {
           </div>
 
           <div className='text-center text-md-start mt-4 pt-2'>
-            <MDBBtn className="mb-0 px-5" size='lg'>Login</MDBBtn>
+            <MDBBtn onClick={onSubmit} className="mb-0 px-5" size='lg'>Login</MDBBtn>
             <p className="small fw-bold mt-2 pt-1 mb-2">Don't have an account? <a href="#!" className="link-danger">Register</a></p>
           </div>
 
@@ -85,6 +113,8 @@ function Login() {
       </div>
 
     </MDBContainer>
+    </Grid>   
+    </Grid> 
   );
 }
 
