@@ -1,10 +1,12 @@
 import React from 'react';
-import Login from './Login';
+// import Login from './Login';
+import Frontpage from './Frontpage';
 
 function App() {
   return (
     <div className="App">
-      <Login />
+      {/* <Login /> */}
+      <Frontpage />
     </div>
   );
 }
