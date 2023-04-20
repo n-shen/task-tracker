@@ -1,10 +1,9 @@
 import React from "react";
-import TaskManager from "../components/taskManager/manager";
 
 const Home = () => {
   return (
     <div>
-      <TaskManager />
+      <div className="">HomePage</div>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import TaskList from "../tasks/taskLists";
 import SortTasks from "./sortTasks";
 import ViewByCategory from "./viewByCategory";
 import CategoryTask from "./categoryTasks";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
 
@@ -74,7 +74,6 @@ const TaskManager = () => {
             <SortTasks tasks={tasks} />
           </div>
           <div className="taskManager--view">
-            <BrowserRouter>
             <Routes>
               <Route path="/" element={<ViewByCategory tasks={tasks} />} />
               <Route
@@ -82,7 +81,6 @@ const TaskManager = () => {
                 element={<CategoryTask tasks={tasks} />}
               />
             </Routes>
-            </BrowserRouter>
           </div>
         </div>
       </div>

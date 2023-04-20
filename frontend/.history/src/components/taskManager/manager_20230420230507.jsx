@@ -74,7 +74,6 @@ const TaskManager = () => {
             <SortTasks tasks={tasks} />
           </div>
           <div className="taskManager--view">
-            <BrowserRouter>
             <Routes>
               <Route path="/" element={<ViewByCategory tasks={tasks} />} />
               <Route
@@ -82,7 +81,6 @@ const TaskManager = () => {
                 element={<CategoryTask tasks={tasks} />}
               />
             </Routes>
-            </BrowserRouter>
           </div>
         </div>
       </div>
