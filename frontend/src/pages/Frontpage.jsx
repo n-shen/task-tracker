@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "./Login";
-import Signup from "./Signup";
+import Register from "./Register";
 import "../styles/Login.css";
 
 function Frontpage(props) {
@@ -61,7 +61,7 @@ function Frontpage(props) {
           </li>
         </div>
       </div>
-      {isLoginSelected ? <Login /> : <Signup />}
+      {isLoginSelected ? <Login /> : <Register />}
       <div className="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
         <div
           className="text-white mb-3 mb-md-0"

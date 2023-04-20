@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
-import "../styles/Login.css";
 import { Grid } from "@mui/material";
 
-function Signup() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
@@ -49,7 +48,7 @@ function Signup() {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      style={{ minHeight: "100vh" }}
+      style={{ minHeight: "85vh" }}
     >
       <Grid item xs={6} width={"100vw"} height={"100vh"}>
         <MDBContainer fluid className="p-3 my-5 h-custom">
@@ -108,4 +107,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Register;
