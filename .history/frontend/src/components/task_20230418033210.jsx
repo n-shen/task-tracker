@@ -116,14 +116,14 @@ const TaskTracker = () => {
     [...new Set(tasks.map((task) => task.category))].map(renderFolder);
 
   return (
-    <div className="App">
-      <h1>Task Tracker</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="task">
+      <h1 className="task--heading">Task Tracker</h1>
+      <form onSubmit={handleSubmit} className="task--form">
+        <label htmlFor="title" className="task--form__label">
           Title:
-          <input type="text" value={title} onChange={handleTitleChange} />
+          <input type="text" value={title} onChange={handleTitleChange} className="task--form__input" />
         </label>
-        <label>
+        <label htmlFor="description" className="task--form__label">
           Description:
           <input
             type="text"
@@ -131,46 +131,51 @@ const TaskTracker = () => {
             onChange={handleDescriptionChange}
           />
         </label>
-        <label>
+        <label htmlFor="status" className="task--form__label">
           Status:
-          <select value={status} onChange={handleStatusChange}>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
+          <select value={status} onChange={handleStatusChange} className="task--form__select">
+            <option value="In Progress" className="task--form__select__option">In Progress</option>
+            <option value="Completed" className="task--form__select__option">Completed</option>
           </select>
         </label>
-        <label>
+        <label htmlFor="dueDate" className="task--form__label">
           Due Date:
-          <input type="date" value={dueDate} onChange={handleDueDateChange} />
+          <input type="date" value={dueDate} onChange={handleDueDateChange} className="task--form__input" />
         </label>
-        <label>
+        <label htmlFor="category" className="task--form__label">
           Category:
-          <select value={category} onChange={handleCategoryChange}>
-            <option value="">Select Category</option>
-            <option value="Personal">Personal</option>
-            <option value="Work">Work</option>
-            <option value="School">School</option>
+          <select value={category} onChange={handleCategoryChange} className="task--form__select">
+            <option value="" className="task--form__select__option">Select Category</option>
+            <option value="Personal" className="task--form__select__option">Personal</option>
+            <option value="Work" className="task--form__select__option">Work</option>
+            <option value="School" className="task--form__select__option">School</option>
+            <option value="Travel" className="task--form__select__option">Travel</option>
+            <option value="Sports" className="task--form__select__option">Sports</option>
+            <option value="Finance" className="task--form__select__option">Finance</option>
+            <option value="Health" className="task--form__select__option">Health & Fitness</option>
+            <option value="Other" className="task--form__select__option">Other</option>
           </select>
         </label>
-        <button type="submit">Add Task</button>
-        {error && <p>{error}</p>}
+        <button type="submit" className="task--form__btn">Add Task</button>
+        {error && <p className="task--form__error">{error}</p>}
       </form>
       <div>
-        <h2>All Tasks</h2>
-        <label>
+        <h2 className="task--headingTwo">All Tasks</h2>
+        {renderTasks()}
+        {/* {renderTasks(sortedTasks)} */}
+        <label className="task--sort">
           Sort By:
-          <select value={sortBy} onChange={handleSortByChange}>
-            <option selected>select</option>
-            <option value="Title">Title</option>
-            <option value="Status">Status</option>
-            <option value="Due Date">Due Date</option>
+          <select value={sortBy} onChange={handleSortByChange} className="task--sort__select">
+            <option value="Title" className="task--sort__select__option">Title</option>
+            <option value="Status" className="task--sort__select__option">Status</option>
+            <option value="Due Date" className="task--sort__select__option">Due Date</option>
           </select>
         </label>
-        {renderTasks(sortedTasks)}
       </div>
-      <div>
+      {/* <div>
         <h2>Tasks by Category</h2>
         {renderFolders()}
-      </div>
+      </div> */}
     </div>
   );
 };
