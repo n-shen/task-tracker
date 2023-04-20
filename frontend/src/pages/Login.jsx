@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import "../styles/Login.css";
 import { Grid } from "@mui/material";
 
+import { useLogin } from "../hooks/useLogin";
+
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isLoading, error, server_login } = useLogin();
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -17,8 +22,9 @@ function Login() {
     setPassword(password);
   };
 
-  const onSubmit = () => {
-    console.log("Login successful for: ", username, password);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await server_login(username, password);
   };
 
   return (
@@ -66,16 +72,27 @@ function Login() {
                   type="button"
                   className="btn btn-primary btn-lg btn-block"
                   onClick={onSubmit}
+                  disabled={isLoading}
                 >
                   Login
                 </button>
               </div>
 
-              <div className="text-center text-md-start pt-2">
-                <p className="small fw-bold mt-2 pt-1 mb-2">
-                  {/*<a href="#">Forgot password?</a>*/}
-                </p>
+              <div className="text-center text-md-start mt-2">
+                <NavLink
+                  to="/"
+                  key="Home"
+                  className="small fw-bold mt-2 pt-1 mb-2"
+                >
+                  Forgot password?
+                </NavLink>
               </div>
+
+              {error && (
+                <div className="alert alert-danger mt-4" role="alert">
+                  {error}
+                </div>
+              )}
             </MDBCol>
           </MDBRow>
         </MDBContainer>

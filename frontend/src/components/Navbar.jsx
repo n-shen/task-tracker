@@ -1,7 +1,12 @@
-import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useLogout } from "../hooks/useLogout";
 
 const Navbar = () => {
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,6 +30,16 @@ const Navbar = () => {
               <li className="nav-item active">
                 <NavLink to="/login" key="Login" className="nav-link">
                   Login
+                </NavLink>
+              </li>
+              <li className="nav-item active">
+                <NavLink
+                  to="/login"
+                  key="Logout"
+                  onClick={handleLogout}
+                  className="nav-link"
+                >
+                  Log out
                 </NavLink>
               </li>
               <li className="nav-item active">
