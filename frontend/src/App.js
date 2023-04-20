@@ -1,6 +1,5 @@
-import React from 'react';
-// import Login from './Login';
-import Frontpage from './Frontpage';
+import React from "react";
+import Frontpage from "./pages/Frontpage";
 
 function App() {
   return (
