@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import { Grid } from "@mui/material";
 
+import { useSignUp } from "../hooks/useSignUp";
+
 function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
+
+  const { isLoading, error, setError, server_register } = useSignUp();
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -27,17 +31,15 @@ function Register() {
     if (username && password && retypePassword) {
       if (password.length > 7) {
         if (password === retypePassword) {
-          console.log("Sign up for: ", username, password);
+          await server_register(username, password, "ATKON");
         } else {
-          console.log(
-            "[Sign-up] Password and retype-password are not matched!"
-          );
+          setError("Password and retype-password are not matched!");
         }
       } else {
-        console.log("[Sign-up] Password should be at least 8 characters!");
+        setError("Password should be at least 8 characters!");
       }
     } else {
-      console.log("[Sign-up] All fields must be filled!");
+      setError("All fields must be filled!");
     }
   };
 
@@ -50,6 +52,11 @@ function Register() {
       justifyContent="center"
       style={{ minHeight: "85vh" }}
     >
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          {error}
+        </div>
+      )}
       <Grid item xs={6} width={"100vw"} height={"100vh"}>
         <MDBContainer fluid className="p-3 my-5 h-custom">
           <MDBRow>
@@ -57,7 +64,7 @@ function Register() {
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                 className="img-fluid"
-                alt="Sample image"
+                alt="Desk"
               />
             </MDBCol>
 
@@ -95,6 +102,7 @@ function Register() {
                   type="button"
                   className="btn btn-primary btn-lg "
                   onClick={onSubmit}
+                  disabled={isLoading}
                 >
                   Register
                 </button>

@@ -37,7 +37,7 @@ function Login() {
               <img
                 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                 className="img-fluid"
-                alt="Sample image"
+                alt="Desk"
               />
             </MDBCol>
 
@@ -73,7 +73,7 @@ function Login() {
 
               <div className="text-center text-md-start pt-2">
                 <p className="small fw-bold mt-2 pt-1 mb-2">
-                  <a href="#">Forgot password?</a>
+                  {/*<a href="#">Forgot password?</a>*/}
                 </p>
               </div>
             </MDBCol>
