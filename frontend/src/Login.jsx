@@ -32,7 +32,8 @@ function Login() {
         justifyContent="center"
         style={{ minHeight: '85vh' }}
         >
-        <Grid item xs={6}>
+        <Grid item xs={6} width={'100vw'}
+        height={'100vh'}>
                
     <MDBContainer fluid className="p-3 my-5 h-custom">
       <MDBRow>
@@ -40,7 +41,7 @@ function Login() {
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp" class="img-fluid" alt="Sample image" />
         </MDBCol>
 
-        <MDBCol col='4' md='6'>
+        <MDBCol col='4' md='4'>
 
           <div className="divider d-flex align-items-center my-4">
             <p className="text-center fw-bold mx-3 mb-0">Sign In</p>
