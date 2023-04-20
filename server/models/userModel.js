@@ -23,10 +23,11 @@ const userSchema = new Schema(
 );
 
 userSchema.statics.signUp = async function (user_name, password, back_code) {
-  const pre_exist = await this.findOne({ user_name });
-  if (pre_exist) {
+  if (!user_name || !password || !back_code)
+    throw Error("Missing required fields!");
+
+  if (await this.findOne({ user_name }))
     throw Error("Username already in use!");
-  }
 
   // encrypt user password
   const pw_salt = await bcrypt.genSalt(12);
@@ -40,6 +41,18 @@ userSchema.statics.signUp = async function (user_name, password, back_code) {
     password: pw_hash,
     backup_code: bc_hash,
   });
+};
+
+userSchema.statics.signIn = async function (user_name, password) {
+  if (!user_name || !password) throw Error("Missing required fields!");
+
+  const pre_user = await this.findOne({ user_name });
+  if (!pre_user) throw Error("Username invalid!");
+
+  const pre_match = await bcrypt.compare(password, pre_user.password);
+  if (!pre_match) throw Error("Password invalid!");
+
+  return pre_user;
 };
 
 const User = mongoose.model("User", userSchema);
