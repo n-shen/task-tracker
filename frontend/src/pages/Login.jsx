@@ -77,7 +77,6 @@ function Login() {
                   Login
                 </button>
               </div>
-
               <div className="text-center text-md-start mt-2">
                 <NavLink
                   to="/"
@@ -87,7 +86,6 @@ function Login() {
                   Forgot password?
                 </NavLink>
               </div>
-
               {error && (
                 <div className="alert alert-danger mt-4" role="alert">
                   {error}

@@ -1,54 +1,53 @@
 import { NavLink } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Navbar = () => {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
   const handleLogout = () => {
     logout();
   };
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container flex-md-row">
-          <NavLink to="/" key="Home" className="navbar-brand">
-            Task Tracker
-          </NavLink>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <NavLink to="/login" key="Login" className="nav-link">
-                  Login
-                </NavLink>
-              </li>
+    <div className="p-1">
+      <nav className="navbar navbar-expand navbar-light bg-light justify-content-between p-lg-2">
+        <NavLink to="/" key="Home" className="navbar-brand p-1">
+          Task Tracker
+        </NavLink>
+
+        {user && <span>{user && <div>Hi, {user.user}!</div>}</span>}
+        <div className="my-2 my-lg-0">
+          <ul className="navbar-nav">
+            {user && (
               <li className="nav-item active">
                 <NavLink
                   to="/login"
                   key="Logout"
                   onClick={handleLogout}
-                  className="nav-link"
+                  className="btn btn-outline-dark"
                 >
                   Log out
                 </NavLink>
               </li>
+            )}
+
+            {!user && (
+              <li className="nav-item active">
+                <NavLink to="/login" key="Login" className="nav-link">
+                  Login
+                </NavLink>
+              </li>
+            )}
+
+            {!user && (
               <li className="nav-item active">
                 <NavLink to="/register" key="Register" className="nav-link">
                   Sign Up
                 </NavLink>
               </li>
-            </ul>
-          </div>
+            )}
+          </ul>
         </div>
       </nav>
     </div>

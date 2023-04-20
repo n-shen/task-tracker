@@ -52,11 +52,6 @@ function Register() {
       justifyContent="center"
       style={{ minHeight: "85vh" }}
     >
-      {error && (
-        <div className="alert alert-danger" role="alert">
-          {error}
-        </div>
-      )}
       <Grid item xs={6} width={"100vw"} height={"100vh"}>
         <MDBContainer fluid className="p-3 my-5 h-custom">
           <MDBRow>
@@ -106,6 +101,11 @@ function Register() {
                 >
                   Register
                 </button>
+                {error && (
+                  <div className="alert alert-danger mt-4" role="alert">
+                    {error}
+                  </div>
+                )}
               </div>
             </MDBCol>
           </MDBRow>
