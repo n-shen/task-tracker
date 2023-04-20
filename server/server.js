@@ -1,10 +1,9 @@
 import * as dotenv from "dotenv";
 import cors from "cors";
 import express from "express";
+import mongoose from "mongoose";
 
 dotenv.config();
-
-const server_port = process.env.PORT_NUM;
 const app = express();
 
 // app.use(express.static("build"));
@@ -18,6 +17,22 @@ import taskRouter from "./routes/taskRouter.js";
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/task", taskRouter);
 
-app.listen(server_port, () => {
-    console.log("TL-Server is running on port: " + server_port);
-});
+mongoose
+  .connect(process.env.MDB_LINK)
+  .then(() => {
+    app.listen(process.env.PORT_NUM, () => {
+      console.log(
+        "TL-Server is connected to DB and running on port: " +
+          process.env.PORT_NUM
+      );
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+// app.listen(process.env.PORT_NUM, () => {
+//   console.log(
+//     "TL-Server is connected to DB and running on port: " + process.env.PORT_NUM
+//   );
+// });
