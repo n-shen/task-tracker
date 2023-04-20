@@ -5,6 +5,7 @@ import { Home, Login, Signup } from "./pages";
 import { Navbar, Footer } from "./components";
 import { useAuthContext } from "./hooks/useAuthContext";
 
+
 function App() {
   const { user } = useAuthContext();
 
