@@ -20,6 +20,10 @@ const taskSchema = new Schema(
       type: Date,
       required: true,
     },
+    user: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
