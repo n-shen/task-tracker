@@ -31,7 +31,7 @@ const TaskManager = () => {
         .then((response) => {
           if (response.data["success"]) {
             dispatch({ type: "SET_TASKS", payload: response.data["tasks"] });
-            console.log(response.data);
+            // console.log(response.data);
           }
         });
     };
@@ -60,7 +60,7 @@ const TaskManager = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data["success"])
           dispatch({ type: "CREATE_TASKS", payload: response.data["task"] });
       });
