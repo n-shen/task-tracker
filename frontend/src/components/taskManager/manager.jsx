@@ -8,39 +8,81 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
 
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useTasksContext } from "../../hooks/useTasksContext";
+import axios from "axios";
+
 const TaskManager = () => {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
-  );
+  // const [tasks, setTasks] = useState(
+  //   JSON.parse(localStorage.getItem("tasks")) || []
+  // );
+  const { shared_info } = useAuthContext();
+  const baseURL = shared_info.baseURL;
+
+  const { tasks, dispatch } = useTasksContext();
+  const { user } = useAuthContext();
   const [showAddTask, setShowAddTask] = useState(false);
 
+  // useEffect(() => {
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // }, [tasks]);
+
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+    const fetchTasks = async () => {
+      axios
+        .get(`${baseURL}/task/all`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        })
+        .then((response) => {
+          if (response.data["success"]) {
+            console.log(response.data["tasks"]);
+            dispatch({ type: "SET_TASK", payload: response.data["tasks"] });
+          }
+        });
+    };
+
+    if (user) {
+      fetchTasks();
+    }
+  }, [dispatch, user]);
 
   const handleAddTask = (task) => {
-    setTasks([...tasks, task]);
-    setShowAddTask(false);
-  };
-
-  const handleShowAddTask = () => {
-    setShowAddTask(true);
-  };
-
-  const handleHideAddTask = () => {
+    console.log("adding task:", task, user);
+    axios
+      .post(
+        `${baseURL}/task/create`,
+        {
+          taskTitle: task.title,
+          taskDescription: task.description,
+          taskStatus: task.status,
+          taskDeadline: task.dueDate,
+          taskCategory: task.category,
+          taskUser: user.user,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      });
     setShowAddTask(false);
   };
 
   const handleDeleteTask = (index) => {
     const newTasks = [...tasks];
     newTasks.splice(index, 1);
-    setTasks(newTasks);
+    // setTasks(newTasks);
   };
 
   const handleEditTask = (index, newTask) => {
     const newTasks = [...tasks];
     newTasks[index] = newTask;
-    setTasks(newTasks);
+    // setTasks(newTasks);
   };
 
   return (
@@ -49,7 +91,12 @@ const TaskManager = () => {
         <h1 className="taskManager--title">Task Manager</h1>
         <div className="taskManager--addTask">
           <div className="taskManager--addTask__btn">
-            <button onClick={handleShowAddTask} className="addTask-btn">
+            <button
+              onClick={() => {
+                setShowAddTask(true);
+              }}
+              className="addTask-btn"
+            >
               Add Task
             </button>
           </div>
@@ -57,34 +104,27 @@ const TaskManager = () => {
             {showAddTask && (
               <AddTaskForm
                 onAdd={handleAddTask}
-                onHideAddTask={handleHideAddTask}
+                onHideAddTask={() => {
+                  setShowAddTask(false);
+                }}
               />
             )}
           </div>
         </div>
-        <div className="taskManager--grid">
-          <div className="taskManager--taskList">
-            <TaskList
-              tasks={tasks}
-              onDelete={handleDeleteTask}
-              onEdit={handleEditTask}
-            />
-          </div>
-          <div className="taskManager--sort">
-            <SortTasks tasks={tasks} />
-          </div>
-          <div className="taskManager--view">
-            <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<ViewByCategory tasks={tasks} />} />
-              <Route
-                path="/category/:category"
-                element={<CategoryTask tasks={tasks} />}
+        {tasks && (
+          <div className="taskManager--grid">
+            <div className="taskManager--taskList">
+              <TaskList
+                tasks={tasks}
+                onDelete={handleDeleteTask}
+                onEdit={handleEditTask}
               />
-            </Routes>
-            </BrowserRouter>
+            </div>
+            <div className="taskManager--sort">
+              <SortTasks tasks={tasks} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

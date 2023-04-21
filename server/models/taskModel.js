@@ -20,13 +20,44 @@ const taskSchema = new Schema(
       type: Date,
       required: true,
     },
-    user: {
+    category: {
+      type: String,
+      required: false,
+    },
+    fk_user: {
       type: String,
       required: true,
     },
   },
   { timestamps: true }
 );
+
+taskSchema.statics.newTask = async function (
+  task_title,
+  task_description,
+  task_status,
+  task_deadline,
+  task_category,
+  task_user
+) {
+  if (
+    !task_title ||
+    !task_description ||
+    !task_status ||
+    !task_deadline ||
+    !task_user
+  )
+    throw Error("Missing required fields!");
+
+  return await this.create({
+    title: task_title,
+    description: task_description,
+    status: parseInt(task_status, 10),
+    deadline: task_deadline,
+    category: task_category,
+    fk_user: task_user,
+  });
+};
 
 const Task = mongoose.model("Task", taskSchema);
 
