@@ -39,7 +39,7 @@ const TaskManager = () => {
     if (user) {
       fetchTasks();
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, baseURL]);
 
   const handleAddTask = (task) => {
     axios
