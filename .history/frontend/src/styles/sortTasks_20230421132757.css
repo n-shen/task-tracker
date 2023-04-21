@@ -1,0 +1,96 @@
+.sort {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+.sort--head {
+  align-self: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sort--empty {
+  align-self: center;
+  margin: auto auto;
+  height: 100%;
+  text-align: center;
+}
+
+.sort--wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+}
+
+.sort--select--wrapper {
+  width: 100%;
+  padding: 1rem;
+  margin-left: 2rem;
+}
+
+.sort--label {
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+.sort--select {
+  width: 25%;
+  padding: .5rem 0;
+  border: none;
+  border-radius: 0.5rem;
+  font-family: "Fira Sans";
+  color: #333;
+  background-color: #f3f2ed;
+}
+
+.sort--select:focus {
+  outline: none;
+}
+
+.sort--option {
+  font-family: "Fira Sans";
+  color: #333;
+}
+
+.sort--lists {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.sort--list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+}
+
+.sort--list__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  height: 100%;
+  border-bottom: 1px solid #00bfff;
+  padding-bottom: .5rem;
+}
+
+.sort--list__item:last-child {
+  border-bottom: none;
+}
