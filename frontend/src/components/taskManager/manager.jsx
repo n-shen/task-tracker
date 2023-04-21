@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { React, useState } from "react";
 import AddTaskForm from "../tasks/addTask";
 import TaskList from "../tasks/taskLists";
 import SortTasks from "./sortTasks";
@@ -7,16 +7,11 @@ import CategoryTask from "./categoryTasks";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
+import { MdAddTask } from "react-icons/md";
 
 const TaskManager = () => {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
-  );
+  const [tasks, setTasks] = useState([]);
   const [showAddTask, setShowAddTask] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   const handleAddTask = (task) => {
     setTasks([...tasks, task]);
@@ -49,7 +44,8 @@ const TaskManager = () => {
         <h1 className="taskManager--title">Task Manager</h1>
         <div className="taskManager--addTask">
           <div className="taskManager--addTask__btn">
-            <button onClick={handleShowAddTask} className="addTask-btn">
+            <button onClick={handleShowAddTask} className="addTask-btn btn">
+              <MdAddTask className="addTask-icon" />
               Add Task
             </button>
           </div>
