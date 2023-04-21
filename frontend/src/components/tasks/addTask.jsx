@@ -27,6 +27,10 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
       newErrors.push("Due date cannot be any past time!");
     }
 
+    if (!category) {
+      newErrors.push("Category is required");
+    }
+
     // if (!dateAdded) {
     //   newErrors.push("Date added is required");
     // } else if (new Date(dateAdded) > new Date(dueDate)) {
