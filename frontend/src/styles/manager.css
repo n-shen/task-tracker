@@ -1,7 +1,7 @@
 .taskManager {
     background-color: #f3f2ed;
     width: 100%;
-    min-height: 100vh;
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
     font-family: 'Fira Sans', sans-serif;

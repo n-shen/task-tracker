@@ -14,6 +14,14 @@ const Task = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
+  const statusHash = {
+    1: "Planned",
+    2: "In Progress",
+    4: "Finished",
+    3: "Delayed",
+    5: "Cancelled",
+  };
+
   const handleDelete = (task) => {
     console.log("delete", task);
     axios
@@ -159,7 +167,7 @@ const Task = ({ task }) => {
         </p>
         <p className="task--item">
           <strong>Status: </strong>
-          {task.status}
+          {statusHash[task.status]}
         </p>
         <p className="task--item">
           <strong>Due Date: </strong>

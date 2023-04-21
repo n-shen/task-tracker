@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 const TaskTable = () => {
   const { cloud_tasks } = useTasksContext();
 
-  console.log(cloud_tasks);
-
   return (
     <div>
       <div>

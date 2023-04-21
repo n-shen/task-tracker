@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AddTaskForm from "../tasks/addTask";
 import TaskList from "../tasks/taskLists";
-import SortTasks from "./sortTasks";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useTasksContext } from "../../hooks/useTasksContext";
 import axios from "axios";
-
-import TaskTable from "../tasks/taskTable";
 
 const TaskManager = () => {
   const { shared_info } = useAuthContext();
@@ -73,7 +70,7 @@ const TaskManager = () => {
   return (
     <div className="taskManager">
       <div className="taskManager--wrapper">
-        <h1 className="taskManager--title">Task Manager</h1>
+        <h1 className="taskManager--title">My Todo Lists</h1>
         <div className="taskManager--addTask">
           <div className="taskManager--addTask__btn">
             <button
