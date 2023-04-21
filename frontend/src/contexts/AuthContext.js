@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 export const AuthContext = createContext();
 
 const shared_info = {
-  baseURL: "https://task-tracker-beta-384419.uc.r.appspot.com/api/v1",
+  baseURL: "https://task-tracker-lighthall.uc.r.appspot.com/api/v1",
 };
 
 export const authReducer = (state, action) => {
