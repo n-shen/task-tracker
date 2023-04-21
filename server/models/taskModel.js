@@ -65,6 +65,44 @@ taskSchema.statics.newTask = async function (
   });
 };
 
+taskSchema.statics.updateTask = async function (
+  task_id,
+  task_title,
+  task_description,
+  task_status,
+  task_deadline,
+  task_category,
+  task_user
+) {
+  if (
+    !task_id ||
+    !task_title ||
+    !task_description ||
+    !task_status ||
+    !task_deadline ||
+    !task_user
+  )
+    throw Error("Missing required fields!");
+
+  const updatedFrom = await this.findOneAndUpdate(
+    { _id: task_id },
+    {
+      title: task_title,
+      description: task_description,
+      status: parseInt(task_status, 10),
+      deadline: task_deadline,
+      category: task_category,
+      fk_user: task_user,
+    },
+    {
+      new: true,
+    }
+  );
+
+  if (!updatedFrom) throw Error("Not a valid task update request!");
+  return updatedFrom;
+};
+
 taskSchema.statics.destroyTask = async function (task_id) {
   if (!task_id) throw Error("Missing required fields!");
 

@@ -12,6 +12,13 @@ export const tasksReducer = (state, action) => {
       return {
         cloud_tasks: [action.payload, ...state.cloud_tasks],
       };
+    case "UPDATE_TASKS":
+      return {
+        cloud_tasks: [
+          action.payload,
+          ...state.cloud_tasks.filter((t) => t._id !== action.payload._id),
+        ],
+      };
     case "DELETE_TASKS":
       return {
         cloud_tasks: state.cloud_tasks.filter(

@@ -34,8 +34,31 @@ const Task = ({ index, task, onEdit }) => {
   };
 
   const handleSave = () => {
-    onEdit(index, editedTask);
+    axios
+      .post(
+        `${baseURL}/task/update`,
+        {
+          taskId: editedTask._id,
+          taskTitle: editedTask.title,
+          taskDescription: editedTask.description,
+          taskStatus: editedTask.status,
+          taskDeadline: editedTask.deadline,
+          taskCategory: editedTask.category,
+          taskUser: task.fk_user,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        if (response.data["success"])
+          dispatch({ type: "UPDATE_TASKS", payload: response.data["task"] });
+      });
     setIsEditing(false);
+    console.log("updated", editedTask);
   };
 
   const handleCancel = () => {
@@ -77,29 +100,19 @@ const Task = ({ index, task, onEdit }) => {
             onChange={handleEditChange}
             className="edit--select"
           >
-            <option value="Planned">Planned</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-            <option value="Delayed">Delayed</option>
-            <option value="Cancelled">Cancelled</option>
+            <option value="1">Planned</option>
+            <option value="2">In Progress</option>
+            <option value="4">Completed</option>
+            <option value="3">Delayed</option>
+            <option value="5">Cancelled</option>
           </select>
-        </div>
-        <div className="edit--group">
-          <label className="edit--label">Date Added</label>
-          <input
-            type="date"
-            name="dateAdded"
-            value={editedTask.dateAdded}
-            onChange={handleEditChange}
-            className="edit--input"
-          />
         </div>
         <div className="edit--group">
           <label className="edit--label">Due Date</label>
           <input
             type="date"
             name="dueDate"
-            value={editedTask.dueDate}
+            value={editedTask.deadline}
             onChange={handleEditChange}
             className="edit--input"
           />
@@ -147,12 +160,8 @@ const Task = ({ index, task, onEdit }) => {
           {task.status}
         </p>
         <p className="task--item">
-          <strong>Date Added: </strong>
-          {task.dateAdded}
-        </p>
-        <p className="task--item">
           <strong>Due Date: </strong>
-          {task.dueDate}
+          {task.deadline}
         </p>
         <p className="task--item">
           <strong>Category: </strong>

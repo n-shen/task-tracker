@@ -52,6 +52,41 @@ export async function postTasks(req, res) {
   }
 }
 
+export async function updateTasks(req, res) {
+  const {
+    taskId,
+    taskTitle,
+    taskDescription,
+    taskStatus,
+    taskDeadline,
+    taskCategory,
+    taskUser,
+  } = req.body;
+
+  try {
+    const taskProfile = await Task.updateTask(
+      taskId,
+      taskTitle,
+      taskDescription,
+      taskStatus,
+      taskDeadline,
+      taskCategory,
+      taskUser
+    );
+
+    res.json({
+      success: true,
+      message: "Task updated!",
+      task: taskProfile,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      message: e.message,
+    });
+  }
+}
+
 export async function destroyTask(req, res) {
   try {
     const { tid } = req.params;
