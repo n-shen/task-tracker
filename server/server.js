@@ -30,9 +30,3 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
-
-// app.listen(process.env.PORT_NUM, () => {
-//   console.log(
-//     "TL-Server is connected to DB and running on port: " + process.env.PORT_NUM
-//   );
-// });

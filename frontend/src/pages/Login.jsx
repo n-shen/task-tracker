@@ -77,15 +77,15 @@ function Login() {
                   Login
                 </button>
               </div>
-              <div className="text-center text-md-start mt-2">
-                <NavLink
-                  to="/"
-                  key="Home"
-                  className="small fw-bold mt-2 pt-1 mb-2"
-                >
-                  Forgot password?
-                </NavLink>
-              </div>
+              {/*<div className="text-center text-md-start mt-2">*/}
+              {/*  <NavLink*/}
+              {/*    to="/"*/}
+              {/*    key="Home"*/}
+              {/*    className="small fw-bold mt-2 pt-1 mb-2"*/}
+              {/*  >*/}
+              {/*    Forgot password?*/}
+              {/*  </NavLink>*/}
+              {/*</div>*/}
               {error && (
                 <div className="alert alert-danger mt-4" role="alert">
                   {error}
