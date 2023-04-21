@@ -121,17 +121,6 @@ strong {
   outline: none;
 }
 
-.edit--description {
-  width: 50%;
-  padding: .5rem;
-  border-radius: 0.5rem;
-  font-size: 1.3rem;
-  font-family: "Fira Sans";
-  color: #333;
-  border: none;
-  outline: none;
-}
-
 .edit--select {
   width: 50%;
   padding: .5rem 0;

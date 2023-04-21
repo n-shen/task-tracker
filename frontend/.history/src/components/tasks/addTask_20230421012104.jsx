@@ -7,44 +7,44 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
   const [dateAdded, setDateAdded] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // add validation
     const newErrors = [];
-
     if (!title) {
       newErrors.push("Title is required");
     }
-
     if (!description) {
       newErrors.push("Description is required");
     }
-
     if (!dueDate) {
       newErrors.push("Due date is required");
     } else if (new Date(dueDate) < new Date(dateAdded)) {
       newErrors.push("Due date cannot be before date added");
     }
-
     if (!dateAdded) {
       newErrors.push("Date added is required");
     } else if (new Date(dateAdded) > new Date(dueDate)) {
       newErrors.push("Date added cannot be after due date");
     }
-
-    setErrors(newErrors);
-
+    if (!category) {
+      newErrors.push("Category is required");
+    }
+    setError(newErrors);
     if (newErrors.length === 0) {
       const newTask = { title, description, status, dueDate, dateAdded };
       onAdd(newTask);
       setTitle("");
       setDescription("");
+      setStatus("planned");
       setDueDate("");
       setDateAdded("");
-      onHideAddTask();
+      setCategory("");
     }
   };
+
   // handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,55 +74,58 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
+      <h2>Add New Task</h2>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="title" className="form--label">
-            Title:
-          </label>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleChange}
-            className="form--input"
-          />
+        <label htmlFor="title" className="form--label">
+          Title:
+        </label>
+        <input
+          type="text"
+          name="title"
+          value={title}
+          onChange={handleChange}
+          className="form--input"
+        />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Title")) {
+        {error.length > 0 &&
+          error.map((err, index) => {
+            if (err.includes("Title")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
             return null;
-          })}
+          }
+          )}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="description" className="form--label">
-            Description
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            value={description}
-            onChange={handleChange}
-            className="form--description"
-          ></textarea>
+        <label htmlFor="description" className="form--label">
+          Description:
+        </label>
+        <input
+          type="text"
+          name="description"
+          value={description}
+          onChange={handleChange}
+          className="form--input"
+        />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Description")) {
+        {error.length > 0 &&
+          error.map((err, index) => {
+            if (err.includes("description")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
             return null;
-          })}
+          }
+          )}
       </div>
       <div className="form--content">
         <label htmlFor="status" className="form--label">
@@ -153,107 +156,110 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="dateAdded" className="form--label">
-            Date Added:
-          </label>
-          <input
-            type="date"
-            name="dateAdded"
-            value={dateAdded}
-            onChange={handleChange}
-            className="form--input"
-          />
+        <label htmlFor="dateAdded" className="form--label">
+          Date Added:
+        </label>
+        <input
+          type="date"
+          name="dateAdded"
+          value={dateAdded}
+          onChange={handleChange}
+          className="form--input"
+        />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Date added")) {
+        {error.length > 0 &&
+          error.map((err, index) => {
+            if (err.includes("date added")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
             return null;
-          })}
+          }
+          )}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="dueDate" className="form--label">
-            Due Date:
-          </label>
-          <input
-            type="date"
-            name="dueDate"
-            value={dueDate}
-            onChange={handleChange}
-            className="form--input"
-          />
+        <label htmlFor="dueDate" className="form--label">
+          Due Date:
+        </label>
+        <input
+          type="date"
+          name="dueDate"
+          value={dueDate}
+          onChange={handleChange}
+          className="form--input"
+        />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Due date")) {
+        {error.length > 0 &&
+          error.map((err, index) => {
+            if (err.includes("due date")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
             return null;
-          })}
+          }
+          )}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="category" className="form--label">
-            Category:
-          </label>
-          <select
-            name="category"
-            value={category}
-            onChange={handleChange}
-            className="form--select"
-          >
-            <option value="" className="form--select__option">
-              --Select option--
-            </option>
-            <option value="Personal" className="form--select__option">
-              Personal
-            </option>
-            <option value="Work" className="form--select__option">
-              Work
-            </option>
-            <option value="Finance" className="form--select__option">
-              Finance
-            </option>
-            <option value="Travel" className="form--select__option">
-              Travel
-            </option>
-            <option value="Others" className="form--select__option">
-              Other
-            </option>
-          </select>
+        <label htmlFor="category" className="form--label">
+          Category:
+        </label>
+        <select
+          name="category"
+          value={category}
+          onChange={handleChange}
+          className="form--select"
+        >
+          <option value="" className="form--select__option">
+            --Select option--
+          </option>
+          <option value="Personal" className="form--select__option">
+            Personal
+          </option>
+          <option value="Work" className="form--select__option">
+            Work
+          </option>
+          <option value="Finance" className="form--select__option">
+            Finance
+          </option>
+          <option value="Travel" className="form--select__option">
+            Travel
+          </option>
+          <option value="Others" className="form--select__option">
+            Other
+          </option>
+        </select>
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Category")) {
+        {error.length > 0 &&
+          error.map((err, index) => {
+            if (err.includes("category")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
             return null;
-          })}
+          }
+          )}
       </div>
-      <div className="taskManager--addTask__btn">
-        <button type="submit" className="addTask-btn">
-          Save Task
-        </button>
-        <button type="button" className="addTask-btn" onClick={onHideAddTask}>
-          Cancel
-        </button>
-      </div>
+      <button type="submit" className="addTask-btn">
+        Save Task
+      </button>
+      <button type="button" onClick={onHideAddTask} className="addTask-btn">
+        Cancel
+      </button>
     </form>
   );
 };
+
+
 
 export default AddTaskForm;

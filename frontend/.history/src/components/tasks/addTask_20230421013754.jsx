@@ -7,44 +7,47 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
   const [dateAdded, setDateAdded] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // add validation
     const newErrors = [];
-
     if (!title) {
       newErrors.push("Title is required");
     }
-
     if (!description) {
       newErrors.push("Description is required");
     }
-
     if (!dueDate) {
       newErrors.push("Due date is required");
     } else if (new Date(dueDate) < new Date(dateAdded)) {
       newErrors.push("Due date cannot be before date added");
     }
-
     if (!dateAdded) {
       newErrors.push("Date added is required");
     } else if (new Date(dateAdded) > new Date(dueDate)) {
       newErrors.push("Date added cannot be after due date");
     }
-
-    setErrors(newErrors);
-
+    if (!category) {
+      newErrors.push("Category is required");
+    }
+    // setError(newErrors);
+    setError(newErrors.join(", "))
     if (newErrors.length === 0) {
       const newTask = { title, description, status, dueDate, dateAdded };
       onAdd(newTask);
       setTitle("");
       setDescription("");
+      setStatus("planned");
       setDueDate("");
       setDateAdded("");
-      onHideAddTask();
+      setCategory("");
     }
   };
+
+  const errorArray = Array.from(error);
+
   // handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -74,6 +77,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
 
   return (
     <form onSubmit={handleSubmit} className="form">
+      <h2>Add New Task</h2>
       <div className="form--group">
         <div className="form--content">
           <label htmlFor="title" className="form--label">
@@ -87,12 +91,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
             className="form--input"
           />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Title")) {
+        {error.length > 0 &&
+          errorArray.map((err, index) => {
+            if (err.includes("title")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
@@ -102,22 +106,22 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
       <div className="form--group">
         <div className="form--content">
           <label htmlFor="description" className="form--label">
-            Description
+            Description:
           </label>
-          <textarea
-            id="description"
+          <input
+            type="text"
             name="description"
             value={description}
             onChange={handleChange}
-            className="form--description"
-          ></textarea>
+            className="form--input"
+          />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Description")) {
+        {error.length > 0 &&
+          errorArray.map((err, index) => {
+            if (err.includes("description")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
@@ -164,12 +168,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
             className="form--input"
           />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Date added")) {
+        {error.length > 0 &&
+          errorArray.map((err, index) => {
+            if (err.includes("dateAdded")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
@@ -189,12 +193,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
             className="form--input"
           />
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Due date")) {
+        {error.length > 0 &&
+          errorArray.map((err, index) => {
+            if (err.includes("dueDate")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
@@ -232,12 +236,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
             </option>
           </select>
         </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Category")) {
+        {error.length > 0 &&
+          errorArray.map((err, index) => {
+            if (err.includes("category")) {
               return (
                 <p key={index} className="form--error">
-                  {error}
+                  {err}
                 </p>
               );
             }
@@ -245,12 +249,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           })}
       </div>
       <div className="taskManager--addTask__btn">
-        <button type="submit" className="addTask-btn">
-          Save Task
-        </button>
-        <button type="button" className="addTask-btn" onClick={onHideAddTask}>
-          Cancel
-        </button>
+      <button type="submit" className="addTask-btn">
+        Save Task
+      </button>
+      <button type="button" onClick={onHideAddTask} className="addTask-btn">
+        Cancel
+      </button>
       </div>
     </form>
   );

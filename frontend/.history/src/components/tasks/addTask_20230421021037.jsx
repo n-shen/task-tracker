@@ -96,21 +96,24 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="description" className="form--label">
-            Description
-          </label>
-          <textarea
+          <label htmlFor="description" className="form--label">Description</label>
+          {/* <textarea
             id="description"
+            value={description}
+            onChange={handleChange}
+          ></textarea> */}
+          <input
+            type="text"
             name="description"
             value={description}
             onChange={handleChange}
-            className="form--description"
-          ></textarea>
+            className="form--input"
+          />
         </div>
         {errors.length > 0 &&
           errors.map((error, index) => {
@@ -121,7 +124,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--content">
@@ -173,7 +176,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
@@ -198,7 +201,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
@@ -241,7 +244,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="taskManager--addTask__btn">

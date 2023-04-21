@@ -45,7 +45,7 @@ const Task = ({ index, task, onDelete, onEdit }) => {
             name="description"
             value={editedTask.description}
             onChange={handleEditChange}
-            className="edit--description"
+            className="form--description"
           ></textarea>
         </div>
         <div className="edit--group">

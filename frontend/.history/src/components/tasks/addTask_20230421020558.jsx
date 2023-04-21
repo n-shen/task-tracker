@@ -91,37 +91,31 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           errors.map((error, index) => {
             if (error.includes("Title")) {
               return (
-                <p key={index} className="form--error">
+                <p key={index} className="error-message">
                   {error}
                 </p>
               );
             }
-            return null;
           })}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="description" className="form--label">
-            Description
-          </label>
+          <label htmlFor="description">Description</label>
           <textarea
             id="description"
-            name="description"
             value={description}
             onChange={handleChange}
-            className="form--description"
           ></textarea>
         </div>
         {errors.length > 0 &&
           errors.map((error, index) => {
             if (error.includes("Description")) {
               return (
-                <p key={index} className="form--error">
+                <p key={index} className="error-message">
                   {error}
                 </p>
               );
             }
-            return null;
           })}
       </div>
       <div className="form--content">
@@ -168,12 +162,11 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           errors.map((error, index) => {
             if (error.includes("Date added")) {
               return (
-                <p key={index} className="form--error">
+                <p key={index} className="error-message">
                   {error}
                 </p>
               );
             }
-            return null;
           })}
       </div>
       <div className="form--group">
@@ -193,12 +186,11 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           errors.map((error, index) => {
             if (error.includes("Due date")) {
               return (
-                <p key={index} className="form--error">
+                <p key={index} className="error-message">
                   {error}
                 </p>
               );
             }
-            return null;
           })}
       </div>
       <div className="form--group">
@@ -236,12 +228,11 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           errors.map((error, index) => {
             if (error.includes("Category")) {
               return (
-                <p key={index} className="form--error">
+                <p key={index} className="error-message">
                   {error}
                 </p>
               );
             }
-            return null;
           })}
       </div>
       <div className="taskManager--addTask__btn">

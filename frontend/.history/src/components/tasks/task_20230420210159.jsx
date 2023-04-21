@@ -41,12 +41,13 @@ const Task = ({ index, task, onDelete, onEdit }) => {
         </div>
         <div className="edit--group">
           <label className="edit--label">Description</label>
-          <textarea
+          <input
+            type="text"
             name="description"
             value={editedTask.description}
             onChange={handleEditChange}
-            className="edit--description"
-          ></textarea>
+            className="edit--input"
+          />
         </div>
         <div className="edit--group">
           <label className="edit--label">Status</label>

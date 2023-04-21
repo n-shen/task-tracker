@@ -96,14 +96,12 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
         <div className="form--content">
-          <label htmlFor="description" className="form--label">
-            Description
-          </label>
+          <label htmlFor="description" className="form--label">Description</label>
           <textarea
             id="description"
             name="description"
@@ -121,7 +119,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--content">
@@ -173,7 +171,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
@@ -198,7 +196,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="form--group">
@@ -241,7 +239,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
                 </p>
               );
             }
-            return null;
+            return null
           })}
       </div>
       <div className="taskManager--addTask__btn">
