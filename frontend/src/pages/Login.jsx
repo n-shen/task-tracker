@@ -90,6 +90,10 @@ function Login() {
                   {error}
                 </div>
               )}
+
+              <div className="alert alert-success mt-4" role="alert">
+                This website has AuthO JWS token enabled.
+              </div>
             </MDBCol>
           </MDBRow>
         </MDBContainer>

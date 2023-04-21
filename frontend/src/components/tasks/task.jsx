@@ -17,13 +17,13 @@ const Task = ({ task }) => {
   const statusHash = {
     1: "Planned",
     2: "In Progress",
-    4: "Finished",
+    4: "Completed",
     3: "Delayed",
     5: "Cancelled",
   };
 
   const handleDelete = (task) => {
-    console.log("delete", task);
+    // console.log("delete", task);
     axios
       .delete(`${baseURL}/task/destroy/${task._id}`, {
         headers: {
@@ -31,7 +31,7 @@ const Task = ({ task }) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data["success"]) {
           dispatch({ type: "DELETE_TASKS", payload: response.data["task"] });
         }
@@ -62,12 +62,12 @@ const Task = ({ task }) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data["success"])
           dispatch({ type: "UPDATE_TASKS", payload: response.data["task"] });
       });
     setIsEditing(false);
-    console.log("updated", editedTask);
+    // console.log("updated", editedTask);
   };
 
   const handleCancel = () => {
@@ -157,7 +157,7 @@ const Task = ({ task }) => {
   return (
     <div className="task">
       <div className="task--wrapper">
-        <p className="task--item">
+        <p className="mt-3 task--item">
           <strong>Title: </strong>
           {task.title}
         </p>
@@ -166,30 +166,55 @@ const Task = ({ task }) => {
           {task.description}
         </p>
         <p className="task--item">
-          <strong>Status: </strong>
-          {statusHash[task.status]}
-        </p>
-        <p className="task--item">
           <strong>Due Date: </strong>
           {moment.utc(task.deadline).format("YYYY-MM-DD")}
         </p>
         <p className="task--item">
+          <strong>Status: </strong>
+          {task.status === 1 && (
+            <span className="badge rounded-pill bg-info text-dark">
+              {statusHash[task.status]}
+            </span>
+          )}
+          {task.status === 2 && (
+            <span className="badge rounded-pill bg-primary">
+              {statusHash[task.status]}
+            </span>
+          )}
+          {task.status === 4 && (
+            <span className="badge rounded-pill bg-success">
+              {statusHash[task.status]}
+            </span>
+          )}{" "}
+          {task.status === 3 && (
+            <span className="badge rounded-pill bg-warning text-dark">
+              {statusHash[task.status]}
+            </span>
+          )}
+          {task.status === 5 && (
+            <span className="badge rounded-pill bg-danger">
+              {statusHash[task.status]}
+            </span>
+          )}
+        </p>
+
+        <p className="task--item">
           <strong>Category: </strong>
           {task.category}
         </p>
-      </div>
-      <div className="task--btns">
-        <button
-          onClick={() => {
-            handleDelete(task);
-          }}
-          className="task--btn"
-        >
-          Delete
-        </button>
-        <button onClick={handleEdit} className="task--btn">
-          Edit
-        </button>
+        <div className="task--btns">
+          <button
+            onClick={() => {
+              handleDelete(task);
+            }}
+            className="task--btn"
+          >
+            Delete
+          </button>
+          <button onClick={handleEdit} className="task--btn">
+            Edit
+          </button>
+        </div>
       </div>
     </div>
   );
