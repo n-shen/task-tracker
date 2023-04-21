@@ -4,8 +4,9 @@ import { getTasks, postTasks } from "../controllers/task.controller.js";
 
 const taskRouter = express.Router();
 
-taskRouter.use(validAuth);
-taskRouter.get("/all", getTasks);
+// taskRouter.use(validAuth);
+taskRouter.post("/fetch", getTasks);
+
 taskRouter.post("/create", postTasks);
 
 export default taskRouter;

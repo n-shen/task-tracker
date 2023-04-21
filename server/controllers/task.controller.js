@@ -1,11 +1,22 @@
 import { Task } from "../models/taskModel.js";
 
 export async function getTasks(req, res) {
-  res.json({
-    success: true,
-    message: "Task's data fetched successfully!",
-    tasks: { title: "hello" },
-  });
+  try {
+    const { taskUser } = req.body;
+    const taskCollections = await Task.getTasks(taskUser);
+
+    res.json({
+      success: true,
+      message: "Task collections fetched!",
+      tasks: taskCollections,
+      user: taskUser,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      message: e.message,
+    });
+  }
 }
 
 export async function postTasks(req, res) {

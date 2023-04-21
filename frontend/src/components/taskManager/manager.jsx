@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import AddTaskForm from "../tasks/addTask";
 import TaskList from "../tasks/taskLists";
 import SortTasks from "./sortTasks";
-import ViewByCategory from "./viewByCategory";
-import CategoryTask from "./categoryTasks";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
 
@@ -19,7 +16,7 @@ const TaskManager = () => {
   const { shared_info } = useAuthContext();
   const baseURL = shared_info.baseURL;
 
-  const { tasks, dispatch } = useTasksContext();
+  const { cloud_tasks, dispatch } = useTasksContext();
   const { user } = useAuthContext();
   const [showAddTask, setShowAddTask] = useState(false);
 
@@ -30,15 +27,19 @@ const TaskManager = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       axios
-        .get(`${baseURL}/task/all`, {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        })
+        .post(
+          `${baseURL}/task/fetch`,
+          { taskUser: user.user },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        )
         .then((response) => {
           if (response.data["success"]) {
-            console.log(response.data["tasks"]);
-            dispatch({ type: "SET_TASK", payload: response.data["tasks"] });
+            dispatch({ type: "SET_TASKS", payload: response.data["tasks"] });
+            console.log(response.data);
           }
         });
     };
@@ -49,7 +50,6 @@ const TaskManager = () => {
   }, [dispatch, user]);
 
   const handleAddTask = (task) => {
-    console.log("adding task:", task, user);
     axios
       .post(
         `${baseURL}/task/create`,
@@ -69,18 +69,20 @@ const TaskManager = () => {
       )
       .then((response) => {
         console.log(response.data);
+        if (response.data["success"])
+          dispatch({ type: "CREATE_TASKS", payload: response.data["task"] });
       });
     setShowAddTask(false);
   };
 
   const handleDeleteTask = (index) => {
-    const newTasks = [...tasks];
+    const newTasks = [...cloud_tasks];
     newTasks.splice(index, 1);
     // setTasks(newTasks);
   };
 
   const handleEditTask = (index, newTask) => {
-    const newTasks = [...tasks];
+    const newTasks = [...cloud_tasks];
     newTasks[index] = newTask;
     // setTasks(newTasks);
   };
@@ -111,17 +113,17 @@ const TaskManager = () => {
             )}
           </div>
         </div>
-        {tasks && (
+        {cloud_tasks && cloud_tasks.length > 0 && (
           <div className="taskManager--grid">
             <div className="taskManager--taskList">
               <TaskList
-                tasks={tasks}
+                tasks={cloud_tasks}
                 onDelete={handleDeleteTask}
                 onEdit={handleEditTask}
               />
             </div>
             <div className="taskManager--sort">
-              <SortTasks tasks={tasks} />
+              <SortTasks tasks={cloud_tasks} />
             </div>
           </div>
         )}
