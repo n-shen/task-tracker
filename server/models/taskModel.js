@@ -35,7 +35,9 @@ const taskSchema = new Schema(
 taskSchema.statics.getTasks = async function (task_user) {
   if (!task_user) throw Error("Missing required fields!");
 
-  return await this.find();
+  return await this.find({ fk_user: task_user }).sort({
+    createdAt: -1,
+  });
 };
 
 taskSchema.statics.newTask = async function (
