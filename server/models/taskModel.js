@@ -65,6 +65,14 @@ taskSchema.statics.newTask = async function (
   });
 };
 
+taskSchema.statics.destroyTask = async function (task_id) {
+  if (!task_id) throw Error("Missing required fields!");
+
+  const del_task = await this.findOneAndDelete({ _id: task_id });
+  if (!del_task) throw Error("Not a valid task deletion request!");
+  return del_task;
+};
+
 const Task = mongoose.model("Task", taskSchema);
 
 export { Task };

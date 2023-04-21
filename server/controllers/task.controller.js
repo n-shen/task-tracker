@@ -51,3 +51,21 @@ export async function postTasks(req, res) {
     });
   }
 }
+
+export async function destroyTask(req, res) {
+  try {
+    const { tid } = req.params;
+    const task = await Task.destroyTask(tid);
+
+    res.json({
+      success: true,
+      message: "Task destroyed!",
+      task: task,
+    });
+  } catch (e) {
+    res.json({
+      success: false,
+      message: e.message,
+    });
+  }
+}

@@ -10,19 +10,12 @@ import { useTasksContext } from "../../hooks/useTasksContext";
 import axios from "axios";
 
 const TaskManager = () => {
-  // const [tasks, setTasks] = useState(
-  //   JSON.parse(localStorage.getItem("tasks")) || []
-  // );
   const { shared_info } = useAuthContext();
   const baseURL = shared_info.baseURL;
 
   const { cloud_tasks, dispatch } = useTasksContext();
   const { user } = useAuthContext();
   const [showAddTask, setShowAddTask] = useState(false);
-
-  // useEffect(() => {
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }, [tasks]);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -75,12 +68,6 @@ const TaskManager = () => {
     setShowAddTask(false);
   };
 
-  const handleDeleteTask = (index) => {
-    const newTasks = [...cloud_tasks];
-    newTasks.splice(index, 1);
-    // setTasks(newTasks);
-  };
-
   const handleEditTask = (index, newTask) => {
     const newTasks = [...cloud_tasks];
     newTasks[index] = newTask;
@@ -116,11 +103,7 @@ const TaskManager = () => {
         {cloud_tasks && cloud_tasks.length > 0 && (
           <div className="taskManager--grid">
             <div className="taskManager--taskList">
-              <TaskList
-                tasks={cloud_tasks}
-                onDelete={handleDeleteTask}
-                onEdit={handleEditTask}
-              />
+              <TaskList tasks={cloud_tasks} onEdit={handleEditTask} />
             </div>
             <div className="taskManager--sort">
               <SortTasks tasks={cloud_tasks} />

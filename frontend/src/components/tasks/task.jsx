@@ -1,11 +1,32 @@
 import { useState } from "react";
+import axios from "axios";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useTasksContext } from "../../hooks/useTasksContext";
 import "../../styles/taskList.css";
-const Task = ({ index, task, onDelete, onEdit }) => {
+
+const Task = ({ index, task, onEdit }) => {
+  const { dispatch } = useTasksContext();
+  const { user } = useAuthContext();
+  const { shared_info } = useAuthContext();
+  const baseURL = shared_info.baseURL;
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
-  const handleDelete = () => {
-    onDelete(index);
+  const handleDelete = (task) => {
+    console.log("delete", task);
+    axios
+      .delete(`${baseURL}/task/destroy/${task._id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data["success"]) {
+          dispatch({ type: "DELETE_TASKS", payload: response.data["task"] });
+        }
+      });
   };
 
   const handleEdit = () => {
@@ -139,7 +160,12 @@ const Task = ({ index, task, onDelete, onEdit }) => {
         </p>
       </div>
       <div className="task--btns">
-        <button onClick={handleDelete} className="task--btn">
+        <button
+          onClick={() => {
+            handleDelete(task);
+          }}
+          className="task--btn"
+        >
           Delete
         </button>
         <button onClick={handleEdit} className="task--btn">
