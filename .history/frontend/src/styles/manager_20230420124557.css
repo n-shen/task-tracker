@@ -1,0 +1,9 @@
+.taskManager {
+    background-color: #f2f5f5;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+}

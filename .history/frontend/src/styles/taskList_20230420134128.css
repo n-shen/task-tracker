@@ -1,0 +1,28 @@
+.taskList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.taskList--head {
+  align-self: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.task {
+  width: 100%;
+  height: 100%;
+}
+
+.task--wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .1rem;
+  width: 100%;
+  height: 100%;
+}
