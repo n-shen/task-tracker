@@ -1,10 +1,11 @@
 import { useState } from "react";
-import axios from "axios";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useTasksContext } from "../../hooks/useTasksContext";
+import axios from "axios";
+import moment from "moment";
 import "../../styles/taskList.css";
 
-const Task = ({ index, task, onEdit }) => {
+const Task = ({ task }) => {
   const { dispatch } = useTasksContext();
   const { user } = useAuthContext();
   const { shared_info } = useAuthContext();
@@ -67,6 +68,7 @@ const Task = ({ index, task, onEdit }) => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
+
     setEditedTask({ ...editedTask, [name]: value });
   };
 
@@ -111,8 +113,8 @@ const Task = ({ index, task, onEdit }) => {
           <label className="edit--label">Due Date</label>
           <input
             type="date"
-            name="dueDate"
-            value={editedTask.deadline}
+            name="deadline"
+            value={moment.utc(task.deadline).format("YYYY-MM-DD")}
             onChange={handleEditChange}
             className="edit--input"
           />
@@ -128,8 +130,8 @@ const Task = ({ index, task, onEdit }) => {
             <option value="">--Select option--</option>
             <option value="Personal">Personal</option>
             <option value="Work">Work</option>
-            <option value="Finance">Finance</option>
-            <option value="Others">Other</option>
+            <option value="Study">Study</option>
+            <option value="Others">Others</option>
           </select>
         </div>
         <div className="edit--btns">
@@ -161,7 +163,7 @@ const Task = ({ index, task, onEdit }) => {
         </p>
         <p className="task--item">
           <strong>Due Date: </strong>
-          {task.deadline}
+          {moment.utc(task.deadline).format("YYYY-MM-DD")}
         </p>
         <p className="task--item">
           <strong>Category: </strong>

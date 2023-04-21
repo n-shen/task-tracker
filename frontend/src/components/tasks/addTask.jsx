@@ -54,9 +54,6 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
       case "status":
         setStatus(value);
         break;
-      case "dateAdded":
-        setDateAdded(value);
-        break;
       case "dueDate":
         setDueDate(value);
         break;
@@ -147,31 +144,31 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
           </option>
         </select>
       </div>
-      <div className="form--group">
-        <div className="form--content">
-          <label htmlFor="dateAdded" className="form--label">
-            Date Added:
-          </label>
-          <input
-            type="date"
-            name="dateAdded"
-            value={dateAdded}
-            onChange={handleChange}
-            className="form--input"
-          />
-        </div>
-        {errors.length > 0 &&
-          errors.map((error, index) => {
-            if (error.includes("Date added")) {
-              return (
-                <p key={index} className="form--error">
-                  {error}
-                </p>
-              );
-            }
-            return null;
-          })}
-      </div>
+      {/*<div className="form--group">*/}
+      {/*  <div className="form--content">*/}
+      {/*    <label htmlFor="dateAdded" className="form--label">*/}
+      {/*      Date Added:*/}
+      {/*    </label>*/}
+      {/*    <input*/}
+      {/*      type="date"*/}
+      {/*      name="dateAdded"*/}
+      {/*      value={dateAdded}*/}
+      {/*      onChange={handleChange}*/}
+      {/*      className="form--input"*/}
+      {/*    />*/}
+      {/*  </div>*/}
+      {/*  {errors.length > 0 &&*/}
+      {/*    errors.map((error, index) => {*/}
+      {/*      if (error.includes("Date added")) {*/}
+      {/*        return (*/}
+      {/*          <p key={index} className="form--error">*/}
+      {/*            {error}*/}
+      {/*          </p>*/}
+      {/*        );*/}
+      {/*      }*/}
+      {/*      return null;*/}
+      {/*    })}*/}
+      {/*</div>*/}
       <div className="form--group">
         <div className="form--content">
           <label htmlFor="dueDate" className="form--label">
@@ -217,11 +214,8 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
             <option value="Work" className="form--select__option">
               Work
             </option>
-            <option value="Finance" className="form--select__option">
-              Finance
-            </option>
-            <option value="Travel" className="form--select__option">
-              Travel
+            <option value="Study" className="form--select__option">
+              Study
             </option>
             <option value="Others" className="form--select__option">
               Other

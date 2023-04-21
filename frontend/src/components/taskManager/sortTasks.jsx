@@ -10,11 +10,11 @@ const SortTask = ({ tasks }) => {
         case "title":
           return a.title.localeCompare(b.title);
         case "status":
-          return a - b;
+          return b - a;
         case "dateAdded":
-          return new Date(a.dateAdded) - new Date(b.dateAdded);
+          return new Date(a.createdAt) - new Date(b.createdAt);
         case "dueDate":
-          return new Date(a.dueDate) - new Date(b.dueDate);
+          return new Date(a.deadline) - new Date(b.deadline);
         case "category":
           return a.category.localeCompare(b.category);
         default:
@@ -72,14 +72,15 @@ const SortTask = ({ tasks }) => {
                 </p>
                 <p className="sort--list__item">
                   <strong>Date Added: </strong>
-                  {task.dateAdded}
+                  {task.createdAt}
                 </p>
                 <p className="sort--list__item">
                   <strong>Due date: </strong>
-                  {task.dueDate}
+                  {task.deadline}
                 </p>
                 <p className="sort--list__item">
-                  <strong>Category: </strong>Category: {task.category}
+                  <strong>Category: </strong>
+                  {task.category}
                 </p>
               </li>
             ))}

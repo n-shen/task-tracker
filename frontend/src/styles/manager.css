@@ -4,7 +4,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'Fira Sans';
+    font-family: 'Fira Sans', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     color: #333;
@@ -23,9 +23,7 @@
 
 .taskManager--grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(min-content, 1fr));
     grid-gap: 1.5rem;
-    width: 100%;
     padding: 1rem 0;
 }
 

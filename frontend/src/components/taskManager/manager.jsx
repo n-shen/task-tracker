@@ -9,6 +9,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useTasksContext } from "../../hooks/useTasksContext";
 import axios from "axios";
 
+import TaskTable from "../tasks/taskTable";
+
 const TaskManager = () => {
   const { shared_info } = useAuthContext();
   const baseURL = shared_info.baseURL;
@@ -68,12 +70,6 @@ const TaskManager = () => {
     setShowAddTask(false);
   };
 
-  const handleEditTask = (index, newTask) => {
-    const newTasks = [...cloud_tasks];
-    newTasks[index] = newTask;
-    // setTasks(newTasks);
-  };
-
   return (
     <div className="taskManager">
       <div className="taskManager--wrapper">
@@ -100,13 +96,52 @@ const TaskManager = () => {
             )}
           </div>
         </div>
+        {/*<div>*/}
+        {/*  <TaskTable />*/}
+        {/*</div>*/}
         {cloud_tasks && cloud_tasks.length > 0 && (
-          <div className="taskManager--grid">
-            <div className="taskManager--taskList">
-              <TaskList tasks={cloud_tasks} onEdit={handleEditTask} />
-            </div>
-            <div className="taskManager--sort">
-              <SortTasks tasks={cloud_tasks} />
+          <div className="container-fluid px-5 taskManager--grid">
+            <div className="row">
+              <div className="col order-1">
+                <div className="row">
+                  <TaskList
+                    tasks={cloud_tasks.filter(
+                      (task) => task.category === "Personal"
+                    )}
+                    category={"Personal"}
+                  />
+                </div>
+              </div>
+              <div className="col order-2">
+                <div className="row">
+                  <TaskList
+                    tasks={cloud_tasks.filter(
+                      (task) => task.category === "Work"
+                    )}
+                    category={"Work"}
+                  />
+                </div>
+              </div>
+              <div className="col order-3">
+                <div className="row">
+                  <TaskList
+                    tasks={cloud_tasks.filter(
+                      (task) => task.category === "Study"
+                    )}
+                    category={"Study"}
+                  />
+                </div>
+              </div>
+              <div className="col order-4">
+                <div className="row">
+                  <TaskList
+                    tasks={cloud_tasks.filter(
+                      (task) => task.category === "Others"
+                    )}
+                    category={"Others"}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         )}
