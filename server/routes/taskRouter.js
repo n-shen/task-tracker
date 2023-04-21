@@ -9,7 +9,7 @@ import {
 
 const taskRouter = express.Router();
 
-// taskRouter.use(validAuth);
+taskRouter.use(validAuth);
 
 taskRouter.post("/fetch", getTasks);
 
