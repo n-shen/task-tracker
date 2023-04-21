@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Home, Login, Signup } from "./pages";
 import { Navbar, Footer } from "./components";
 import { useAuthContext } from "./hooks/useAuthContext";
-
+import { ViewByCategory } from "./components";
 
 function App() {
   const { user } = useAuthContext();
@@ -27,6 +27,7 @@ function App() {
               path="/register"
               element={!user ? <Signup /> : <Navigate to="/" />}
             ></Route>
+            <Route path="/category" element={<ViewByCategory />}></Route>
           </Routes>
         </div>
         <Footer />

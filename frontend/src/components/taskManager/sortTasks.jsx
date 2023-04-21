@@ -10,11 +10,11 @@ const SortTask = ({ tasks }) => {
         case "title":
           return a.title.localeCompare(b.title);
         case "status":
-          return a.status.localeCompare(b.status);
+          return b - a;
         case "dateAdded":
-          return new Date(a.dateAdded) - new Date(b.dateAdded);
+          return new Date(a.createdAt) - new Date(b.createdAt);
         case "dueDate":
-          return new Date(a.dueDate) - new Date(b.dueDate);
+          return new Date(a.deadline) - new Date(b.deadline);
         case "category":
           return a.category.localeCompare(b.category);
         default:
@@ -55,44 +55,36 @@ const SortTask = ({ tasks }) => {
           </select>
         </div>
         <div>
-          {/* Add a message when there is not task to sort */}
-          {sortedTasks.length === 0 ? (
-            <div className="sort--empty">
-              <h2 className="emptyText">No tasks available for sorting.</h2>
-              <p className="emptySubMsg">Add a task to get started!!!</p>
-            </div>
-          ) : (
-            <ul className="sort--lists">
-              {sortedTasks.map((task, index) => (
-                <li key={index} className="sort--list">
-                  <p className="sort--list__item">
-                    <strong>Title </strong>
-                    {task.title}
-                  </p>
-                  <p className="sort--list__item">
-                    <strong>Description </strong>
-                    {task.description}
-                  </p>
-                  <p className="sort--list__item">
-                    <strong>Status </strong>
-                    {task.status}
-                  </p>
-                  <p className="sort--list__item">
-                    <strong>Date Added </strong>
-                    {task.dateAdded}
-                  </p>
-                  <p className="sort--list__item">
-                    <strong>Due date </strong>
-                    {task.dueDate}
-                  </p>
-                  <p className="sort--list__item">
-                    <strong>Category </strong>
-                    {task.category}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          )}
+          <ul className="sort--lists">
+            {sortedTasks.map((task, index) => (
+              <li key={index} className="sort--list">
+                <p className="sort--list__item">
+                  <strong>Title: </strong>
+                  {task.title}
+                </p>
+                <p className="sort--list__item">
+                  <strong>Description: </strong>
+                  {task.description}
+                </p>
+                <p className="sort--list__item">
+                  <strong>Status: </strong>
+                  {task.status}
+                </p>
+                <p className="sort--list__item">
+                  <strong>Date Added: </strong>
+                  {task.createdAt}
+                </p>
+                <p className="sort--list__item">
+                  <strong>Due date: </strong>
+                  {task.deadline}
+                </p>
+                <p className="sort--list__item">
+                  <strong>Category: </strong>
+                  {task.category}
+                </p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </div>

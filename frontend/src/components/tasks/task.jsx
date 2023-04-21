@@ -1,11 +1,41 @@
 import { useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useTasksContext } from "../../hooks/useTasksContext";
+import axios from "axios";
+import moment from "moment";
 import "../../styles/taskList.css";
-const Task = ({ index, task, onDelete, onEdit }) => {
+
+const Task = ({ task }) => {
+  const { dispatch } = useTasksContext();
+  const { user } = useAuthContext();
+  const { shared_info } = useAuthContext();
+  const baseURL = shared_info.baseURL;
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedTask, setEditedTask] = useState(task);
 
-  const handleDelete = () => {
-    onDelete(index);
+  const statusHash = {
+    1: "Planned",
+    2: "In Progress",
+    4: "Finished",
+    3: "Delayed",
+    5: "Cancelled",
+  };
+
+  const handleDelete = (task) => {
+    console.log("delete", task);
+    axios
+      .delete(`${baseURL}/task/destroy/${task._id}`, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (response.data["success"]) {
+          dispatch({ type: "DELETE_TASKS", payload: response.data["task"] });
+        }
+      });
   };
 
   const handleEdit = () => {
@@ -13,8 +43,31 @@ const Task = ({ index, task, onDelete, onEdit }) => {
   };
 
   const handleSave = () => {
-    onEdit(index, editedTask);
+    axios
+      .post(
+        `${baseURL}/task/update`,
+        {
+          taskId: editedTask._id,
+          taskTitle: editedTask.title,
+          taskDescription: editedTask.description,
+          taskStatus: editedTask.status,
+          taskDeadline: editedTask.deadline,
+          taskCategory: editedTask.category,
+          taskUser: task.fk_user,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        if (response.data["success"])
+          dispatch({ type: "UPDATE_TASKS", payload: response.data["task"] });
+      });
     setIsEditing(false);
+    console.log("updated", editedTask);
   };
 
   const handleCancel = () => {
@@ -23,6 +76,7 @@ const Task = ({ index, task, onDelete, onEdit }) => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
+
     setEditedTask({ ...editedTask, [name]: value });
   };
 
@@ -56,29 +110,19 @@ const Task = ({ index, task, onDelete, onEdit }) => {
             onChange={handleEditChange}
             className="edit--select"
           >
-            <option value="Planned">Planned</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-            <option value="Delayed">Delayed</option>
-            <option value="Cancelled">Cancelled</option>
+            <option value="1">Planned</option>
+            <option value="2">In Progress</option>
+            <option value="4">Completed</option>
+            <option value="3">Delayed</option>
+            <option value="5">Cancelled</option>
           </select>
         </div>
         <div className="edit--group">
-          <label className="edit--label">Date Added: </label>
+          <label className="edit--label">Due Date</label>
           <input
             type="date"
-            name="dateAdded"
-            value={editedTask.dateAdded}
-            onChange={handleEditChange}
-            className="edit--input"
-          />
-        </div>
-        <div className="edit--group">
-          <label className="edit--label">Due Date: </label>
-          <input
-            type="date"
-            name="dueDate"
-            value={editedTask.dueDate}
+            name="deadline"
+            value={moment.utc(task.deadline).format("YYYY-MM-DD")}
             onChange={handleEditChange}
             className="edit--input"
           />
@@ -94,8 +138,8 @@ const Task = ({ index, task, onDelete, onEdit }) => {
             <option value="">--Select option--</option>
             <option value="Personal">Personal</option>
             <option value="Work">Work</option>
-            <option value="Finance">Finance</option>
-            <option value="Others">Other</option>
+            <option value="Study">Study</option>
+            <option value="Others">Others</option>
           </select>
         </div>
         <div className="edit--btns">
@@ -122,16 +166,12 @@ const Task = ({ index, task, onDelete, onEdit }) => {
           {task.description}
         </p>
         <p className="task--item">
-          <strong>Status </strong>
-          {task.status}
+          <strong>Status: </strong>
+          {statusHash[task.status]}
         </p>
         <p className="task--item">
-          <strong>Date Added </strong>
-          {task.dateAdded}
-        </p>
-        <p className="task--item">
-          <strong>Due Date </strong>
-          {task.dueDate}
+          <strong>Due Date: </strong>
+          {moment.utc(task.deadline).format("YYYY-MM-DD")}
         </p>
         <p className="task--item">
           <strong>Category </strong>
@@ -139,7 +179,12 @@ const Task = ({ index, task, onDelete, onEdit }) => {
         </p>
       </div>
       <div className="task--btns">
-        <button onClick={handleDelete} className="task--btn">
+        <button
+          onClick={() => {
+            handleDelete(task);
+          }}
+          className="task--btn"
+        >
           Delete
         </button>
         <button onClick={handleEdit} className="task--btn">

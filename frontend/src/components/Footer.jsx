@@ -1,5 +1,3 @@
-import React, { useEffect } from "react";
-
 const Footer = () => {
   return (
     <div className="mt-5 mb-5">
