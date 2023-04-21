@@ -19,9 +19,10 @@
 .addTask-btn {
   border: none;
   border-radius: 0.5rem;
+  font-size: 1.2rem;
   color: #f2f5f5;
   background-color: #00bfff;
-  padding: .5rem;
+  padding: .5rem 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
@@ -65,12 +66,14 @@
 
 .form--error {
   color: red;
+  font-size: 1.2rem;
   font-weight: 700;
   margin: 0.5rem 0 0 5rem;
 }
 
 
 .form--label {
+  font-size: 1.4rem;
   font-weight: 700;
   margin-right: 0.5rem;
   width: 20%;
@@ -81,6 +84,7 @@
   width: 80%;
   padding: .5rem;
   border-radius: 0.5rem;
+  font-size: 1.3rem;
   font-family: "Fira Sans";
   color: #333;
   border: none;
@@ -91,6 +95,7 @@
   width: 80%;
   padding: .5rem;
   border-radius: 0.5rem;
+  font-size: 1.3rem;
   font-family: "Fira Sans";
   color: #333;
   border: none;
@@ -102,6 +107,7 @@
   padding: .5rem 0;
   border: none;
   border-radius: 0.5rem;
+  font-size: 1.3rem;
   font-family: "Fira Sans";
   color: #333;
 }

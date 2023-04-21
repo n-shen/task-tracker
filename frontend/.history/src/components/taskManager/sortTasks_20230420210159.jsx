@@ -67,13 +67,13 @@ const SortTask = ({ tasks }) => {
                   {task.description}
                 </p>
                 <p className="sort--list__item">
-                  <strong>Status: </strong>{task.status}
+                  <strong>Status: </strong>Status: {task.status}
                 </p>
                 <p className="sort--list__item">
-                  <strong>Date Added: </strong>{task.dateAdded}
+                  <strong>Date Added: </strong>Date Added: {task.dateAdded}
                 </p>
                 <p className="sort--list__item">
-                  <strong>Due date: </strong>{task.dueDate}
+                  <strong>Due date: </strong>Due Date: {task.dueDate}
                 </p>
                 <p className="sort--list__item">
                   <strong>Category: </strong>Category: {task.category}

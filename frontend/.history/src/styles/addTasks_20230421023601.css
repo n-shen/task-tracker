@@ -19,6 +19,7 @@
 .addTask-btn {
   border: none;
   border-radius: 0.5rem;
+  font-size: 1.2rem;
   color: #f2f5f5;
   background-color: #00bfff;
   padding: .5rem;

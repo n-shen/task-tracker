@@ -37,6 +37,7 @@
 }
 
 .view--categoryName {
+  font-size: 1.3rem;
   font-weight: 700;
   margin-right: 0.5rem;
   text-decoration: none;
@@ -101,7 +102,7 @@
   color: #f2f2f5;
   background-color: #00bfff;
   border-radius: 0.5rem;
-  padding: .5rem;
+  padding: 1rem;
   margin-top: -1.5rem;
   transition: all .3s ease-in-out;
   -webkit-transition: all .3s ease-in-out;

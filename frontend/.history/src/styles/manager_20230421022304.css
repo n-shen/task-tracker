@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     font-family: 'Fira Sans';
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 400;
     color: #333;
 }
@@ -26,7 +26,7 @@
     grid-template-columns: repeat(3, minmax(min-content, 1fr));
     grid-gap: 1.5rem;
     width: 100%;
-    padding: 1rem 0;
+    padding: 2rem 0;
 }
 
 .taskManager--grid>div {

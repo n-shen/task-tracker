@@ -8,7 +8,7 @@
 
 .sort--head {
   align-self: center;
-  font-size: 1.8rem;
+  font-size: 2.2rem;
   font-weight: 700;
 }
 
@@ -27,6 +27,7 @@
 }
 
 .sort--label {
+  font-size: 1.4rem;
   font-weight: 700;
   margin-right: 0.5rem;
 }
@@ -36,6 +37,7 @@
   padding: .5rem 0;
   border: none;
   border-radius: 0.5rem;
+  font-size: 1.3rem;
   font-family: "Fira Sans";
   color: #333;
   background-color: #f3f2ed;
@@ -46,6 +48,7 @@
 }
 
 .sort--option {
+  font-size: 1.3rem;
   font-family: "Fira Sans";
   color: #333;
 }
@@ -79,6 +82,7 @@
   height: 100%;
   border-bottom: 1px solid #00bfff;
   padding-bottom: .5rem;
+  font-size: 1.3rem;
 }
 
 .sort--list__item:last-child {
