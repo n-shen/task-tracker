@@ -99,7 +99,7 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
       <div className="form--group">
         <div className="form--content">
           <label htmlFor="description" className="form--label">
-            Description
+            Description:
           </label>
           <textarea
             id="description"

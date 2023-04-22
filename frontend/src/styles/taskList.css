@@ -8,8 +8,15 @@
 
 .taskList--head {
   align-self: center;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 700;
+}
+
+.taskList--empty {
+  align-self: center;
+  margin: auto auto;
+  height: 100%;
+  text-align: center;
 }
 
 .task {
@@ -25,25 +32,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
   box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+  background-color: #f3f2ed;
+  padding: .5rem 0;
 }
 
 .task--item {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 70%;
   height: 100%;
   border-bottom: 1px solid #00bfff;
   padding-bottom: .5rem;
+  text-align: center;
 }
 
 strong {
   font-weight: 700;
-  margin-right: .5rem;
 }
 
 .task--item:last-child {
@@ -64,7 +75,7 @@ strong {
   background-color: #00bfff;
   color: #F5F5F5;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem .7rem;
   border: none;
   outline: none;
 }
@@ -90,21 +101,18 @@ strong {
 
 .edit--group {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
   width: 100%;
 }
 
 .edit--label {
   font-weight: 700;
   margin-right: 0.5rem;
-  width: 25%;
-
 }
 
 .edit--input {
-  width: 50%;
   padding: .5rem;
   border-radius: 0.5rem;
   font-family: "Fira Sans";
@@ -118,7 +126,6 @@ strong {
 }
 
 .edit--description {
-  width: 50%;
   padding: .5rem;
   border-radius: 0.5rem;
   font-family: "Fira Sans";
@@ -128,12 +135,13 @@ strong {
 }
 
 .edit--select {
-  width: 50%;
   padding: .5rem 0;
   border: none;
   border-radius: 0.5rem;
   font-family: "Fira Sans";
   color: #333;
+  outline: none;
+  cursor: pointer;
 }
 
 .edit--select:focus {
@@ -153,7 +161,7 @@ strong {
   background-color: #00bfff;
   color: #F5F5F5;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.3rem .7rem;
   border: none;
   outline: none;
 }

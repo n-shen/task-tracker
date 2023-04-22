@@ -84,7 +84,7 @@ const Task = ({ task }) => {
     return (
       <div className="edit--wrapper">
         <div className="edit--group">
-          <label className="edit--label">Title</label>
+          <label className="edit--label">Title </label>
           <input
             type="text"
             name="title"
@@ -94,7 +94,7 @@ const Task = ({ task }) => {
           />
         </div>
         <div className="edit--group">
-          <label className="edit--label">Description</label>
+          <label className="edit--label">Description </label>
           <textarea
             name="description"
             value={editedTask.description}
@@ -103,7 +103,7 @@ const Task = ({ task }) => {
           ></textarea>
         </div>
         <div className="edit--group">
-          <label className="edit--label">Status</label>
+          <label className="edit--label">Status </label>
           <select
             name="status"
             value={editedTask.status}
@@ -128,7 +128,7 @@ const Task = ({ task }) => {
           />
         </div>
         <div className="edit--group">
-          <label className="edit--label">Category</label>
+          <label className="edit--label">Category </label>
           <select
             name="category"
             value={editedTask.category}
@@ -158,23 +158,23 @@ const Task = ({ task }) => {
     <div className="task">
       <div className="task--wrapper">
         <p className="task--item">
-          <strong>Title: </strong>
+          <strong>Title </strong>
           {task.title}
         </p>
         <p className="task--item">
-          <strong>Description: </strong>
+          <strong>Description </strong>
           {task.description}
         </p>
         <p className="task--item">
-          <strong>Status: </strong>
+          <strong>Status </strong>
           {statusHash[task.status]}
         </p>
         <p className="task--item">
-          <strong>Due Date: </strong>
+          <strong>Due Date </strong>
           {moment.utc(task.deadline).format("YYYY-MM-DD")}
         </p>
         <p className="task--item">
-          <strong>Category: </strong>
+          <strong>Category </strong>
           {task.category}
         </p>
       </div>
