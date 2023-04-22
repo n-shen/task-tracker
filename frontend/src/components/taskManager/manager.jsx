@@ -80,6 +80,7 @@ const TaskManager = () => {
               }}
               className="addTask-btn"
             >
+              <MdAddTask className="addTask-icon" />
               Add Task
             </button>
           </div>

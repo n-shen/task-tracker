@@ -15,7 +15,8 @@
 }
 
 .addTask-icon {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  margin-right: .2rem;
 }
 
 .taskManager--addTask__btn {
@@ -32,7 +33,7 @@
   border-radius: 0.5rem;
   color: #f2f5f5;
   background-color: #00bfff;
-  padding: .5rem;
+  padding: .2rem .5rem;
   margin-bottom: 1rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;

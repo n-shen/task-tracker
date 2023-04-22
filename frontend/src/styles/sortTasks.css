@@ -89,6 +89,7 @@
   height: 100%;
   border-bottom: 1px solid #00bfff;
   padding-bottom: .5rem;
+  text-align: center;
 }
 
 .sort--list__item:last-child {
