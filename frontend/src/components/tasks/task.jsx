@@ -84,7 +84,7 @@ const Task = ({ task }) => {
     return (
       <div className="edit--wrapper">
         <div className="edit--group">
-          <label className="edit--label">Title</label>
+          <label className="edit--label">Title </label>
           <input
             type="text"
             name="title"
@@ -94,7 +94,7 @@ const Task = ({ task }) => {
           />
         </div>
         <div className="edit--group">
-          <label className="edit--label">Description</label>
+          <label className="edit--label">Description </label>
           <textarea
             name="description"
             value={editedTask.description}
@@ -103,7 +103,7 @@ const Task = ({ task }) => {
           ></textarea>
         </div>
         <div className="edit--group">
-          <label className="edit--label">Status</label>
+          <label className="edit--label">Status </label>
           <select
             name="status"
             value={editedTask.status}
@@ -128,7 +128,7 @@ const Task = ({ task }) => {
           />
         </div>
         <div className="edit--group">
-          <label className="edit--label">Category</label>
+          <label className="edit--label">Category </label>
           <select
             name="category"
             value={editedTask.category}
@@ -162,7 +162,7 @@ const Task = ({ task }) => {
           {task.title}
         </p>
         <p className="task--item">
-          <strong>Description: </strong>
+          <strong>Description </strong>
           {task.description}
         </p>
         <p className="task--item">

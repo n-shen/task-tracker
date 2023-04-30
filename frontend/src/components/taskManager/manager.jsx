@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import AddTaskForm from "../tasks/addTask";
 import TaskList from "../tasks/taskLists";
 import "../../styles/manager.css";
 import "../../styles/addTasks.css";
+import { MdAddTask } from "react-icons/md";
 
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useTasksContext } from "../../hooks/useTasksContext";
@@ -79,6 +80,7 @@ const TaskManager = () => {
               }}
               className="addTask-btn"
             >
+              <MdAddTask className="addTask-icon" />
               Add Task
             </button>
           </div>
