@@ -6,23 +6,15 @@ const Footer = () => {
         token may expired.{" "}
       </p>
       <p className="text-center text-gray-500 dark:text-gray-400">
-        Developed by{" "}
+        Developed by LH-Team-2 (Nicholas S., Anjali G., Elue M.) for educational
+        purpose only. Powered by{" "}
         <a
-          href="https://docs.google.com/document/d/e/2PACX-1vST-CII2b4CxgqApqwRXySUtCcDzQNP_VXymKHIq6wRShxwX7QxuWheb5A-dkVolO-O-waCXSuGe9w8/pub"
+          href="https://nws.nicholastec.com/"
           target="_blank"
           rel="noreferrer"
           className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"
         >
-          Team-2
-        </a>{" "}
-        for educational purpose only. Powered by{" "}
-        <a
-          href="https://shen.dev"
-          target="_blank"
-          rel="noreferrer"
-          className="font-medium text-blue-600 underline dark:text-blue-500 hover:no-underline"
-        >
-          Nicholas Shen
+          NCloud
         </a>
         . Copyrights Reserved @2023
       </p>
