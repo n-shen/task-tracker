@@ -4,7 +4,6 @@ const AddTaskForm = ({ onAdd, onHideAddTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState(1);
-  const [dateAdded, setDateAdded] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [category, setCategory] = useState("");
   const [errors, setErrors] = useState([]);

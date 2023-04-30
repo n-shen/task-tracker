@@ -28,10 +28,10 @@ const TaskList = ({ tasks, category }) => {
     // dispatch({ type: "SET_TASKS", payload: sortedTasks });
   };
 
-  console.log("Ready to display:", tasks);
+  // console.log("Ready to display:", tasks);
   return (
     <div className="taskList">
-      <h1 className="taskList--head">{category}</h1>
+      <h1 className="taskList--head mt-3">{category}</h1>
       <div className="sort--select--wrapper">
         <label htmlFor="sort" className="sort--label">
           Sort By:{" "}
@@ -40,7 +40,7 @@ const TaskList = ({ tasks, category }) => {
           name="sort"
           value={sortBy}
           onChange={handleSortBy}
-          className="sort--select"
+          className="sort--select w-auto "
         >
           <option value="title" className="sort--option">
             Title

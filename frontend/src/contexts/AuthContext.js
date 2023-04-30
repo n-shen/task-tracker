@@ -2,7 +2,7 @@ import { createContext, useReducer, useEffect } from "react";
 export const AuthContext = createContext();
 
 const shared_info = {
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://task-tracker-lighthall.uc.r.appspot.com/api/v1",
 };
 
 export const authReducer = (state, action) => {
@@ -25,7 +25,7 @@ export const AuthContextProvider = ({ children }) => {
       dispatch({ type: "LOGIN", payload: user });
     }
   }, []);
-  console.log("AuthContext state:", state);
+  // console.log("AuthContext state:", state);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch, shared_info }}>

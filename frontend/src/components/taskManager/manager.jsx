@@ -32,7 +32,7 @@ const TaskManager = () => {
         .then((response) => {
           if (response.data["success"]) {
             dispatch({ type: "SET_TASKS", payload: response.data["tasks"] });
-            console.log(response.data);
+            // console.log(response.data);
           }
         });
     };
@@ -40,7 +40,7 @@ const TaskManager = () => {
     if (user) {
       fetchTasks();
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, baseURL]);
 
   const handleAddTask = (task) => {
     axios
@@ -61,7 +61,7 @@ const TaskManager = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data["success"])
           dispatch({ type: "CREATE_TASKS", payload: response.data["task"] });
       });
@@ -71,7 +71,7 @@ const TaskManager = () => {
   return (
     <div className="taskManager">
       <div className="taskManager--wrapper">
-        <h1 className="taskManager--title">My Todo Lists</h1>
+        <h1 className="taskManager--title mt-3">My Todo Lists</h1>
         <div className="taskManager--addTask">
           <div className="taskManager--addTask__btn">
             <button
@@ -98,6 +98,18 @@ const TaskManager = () => {
         {/*<div>*/}
         {/*  <TaskTable />*/}
         {/*</div>*/}
+        {!cloud_tasks ||
+          (cloud_tasks.length === 0 && (
+            <div>
+              <div
+                className="container alert alert-success alert-dismissible fade show w-75 text-center justify-content-center"
+                role="alert"
+              >
+                <strong>Welcome!</strong> Create your first task by click 'Add
+                Task' button now~
+              </div>
+            </div>
+          ))}
         {cloud_tasks && cloud_tasks.length > 0 && (
           <div className="container-fluid px-5 taskManager--grid">
             <div className="row">

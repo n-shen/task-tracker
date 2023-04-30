@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
 import { MDBContainer, MDBCol, MDBRow, MDBInput } from "mdb-react-ui-kit";
 import "../styles/Login.css";
 import { Grid } from "@mui/material";
@@ -91,6 +90,10 @@ function Login() {
                   {error}
                 </div>
               )}
+
+              <div className="alert alert-success mt-4" role="alert">
+                This website has AuthO JWS token enabled.
+              </div>
             </MDBCol>
           </MDBRow>
         </MDBContainer>
